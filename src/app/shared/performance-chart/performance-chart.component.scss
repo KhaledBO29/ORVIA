@@ -1,0 +1,122 @@
+.performance {
+  min-width: 0;
+  min-height: 270px;
+}
+
+.panel-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.panel-heading h2 {
+  margin: 0;
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.panel-subtitle {
+  margin: 5px 0 0;
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.period-selector {
+  display: flex;
+  gap: 2px;
+  padding: 3px;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  background: #faf9fc;
+}
+
+.period-selector button {
+  padding: 5px 7px;
+  border: 0;
+  border-radius: 5px;
+  color: #77788d;
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+  font-size: 9px;
+  white-space: nowrap;
+}
+
+.period-selector .period-selector__button--active {
+  color: #5638d5;
+  background: #fff;
+  box-shadow: 0 1px 3px #241a4914;
+  font-weight: 700;
+}
+
+.chart-legend {
+  display: flex;
+  gap: 16px;
+  margin: 22px 0 8px;
+  color: #77788d;
+  font-size: 10px;
+}
+
+.chart-legend span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.chart-legend__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+
+.chart-legend__dot--violet { background: #7251e5; }
+.chart-legend__dot--rose { background: #e7819c; }
+
+.chart {
+  display: flex;
+  height: 152px;
+  gap: 10px;
+}
+
+.chart__axis {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 1px;
+  color: #9999a8;
+  font-size: 9px;
+}
+
+.chart__plot {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  border-bottom: 1px solid #eeedf3;
+  background: repeating-linear-gradient(to bottom, transparent 0, transparent 37px, #f0eff5 38px, transparent 39px);
+}
+
+.chart__line {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2.5;
+  vector-effect: non-scaling-stroke;
+}
+
+.chart__line--sales { stroke: #6b49df; }
+.chart__line--expenses { stroke: #e57d97; }
+
+.chart__dates {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0 0 35px;
+  color: #9293a4;
+  font-size: 9px;
+}
+
+@media (max-width: 520px) {
+  .period-selector button { padding: 5px; font-size: 8px; }
+  .chart__dates { font-size: 8px; }
+}

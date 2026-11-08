@@ -1,0 +1,42 @@
+<section class="panel task-flow" aria-labelledby="task-flow-title">
+  <div class="panel-heading">
+    <div>
+      <h2 id="task-flow-title">Flujo de trabajo</h2>
+      <p class="panel-subtitle">{{ completedCount() }} de {{ tasks().length }} tareas completadas</p>
+    </div>
+    <span class="task-flow__progress-label">{{ progressPercentage() }}%</span>
+  </div>
+
+  <div class="task-flow__progress" role="progressbar" [attr.aria-valuenow]="progressPercentage()" aria-valuemin="0" aria-valuemax="100">
+    <span [style.width.%]="progressPercentage()"></span>
+  </div>
+
+  @if (tasks().length === 0) {
+    <p class="task-flow__empty">Aún no tienes tareas. Agrega la primera para empezar.</p>
+  } @else {
+    <ul class="task-list">
+      <li class="task-list__item" *ngFor="let task of tasks()" [ngClass]="{ 'task-list__item--completed': task.completed }">
+        <label class="task-list__label">
+          <input
+            type="checkbox"
+            [checked]="task.completed"
+            [attr.aria-label]="'Marcar como ' + (task.completed ? 'pendiente' : 'completada') + ': ' + task.title"
+            (change)="taskToggled.emit(task.id)"
+          />
+          <span class="task-list__check" aria-hidden="true"></span>
+          <span class="task-list__title">{{ task.title }}</span>
+        </label>
+        <span class="task-list__status">{{ task.completed ? 'Completada' : 'Pendiente' }}</span>
+      </li>
+    </ul>
+  }
+
+  <form class="task-form" [formGroup]="taskForm" (ngSubmit)="addTask()">
+    <label class="visually-hidden" for="new-task">Nueva tarea</label>
+    <input id="new-task" type="text" formControlName="title" placeholder="Agregar una tarea..." />
+    <button type="submit" [disabled]="taskForm.invalid">Agregar</button>
+  </form>
+  @if (taskForm.controls.title.invalid && taskForm.controls.title.touched) {
+    <p class="task-form__error">Escribe una tarea de 1 a 80 caracteres.</p>
+  }
+</section>

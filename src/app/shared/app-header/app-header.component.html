@@ -1,0 +1,26 @@
+<header class="topbar">
+  <button
+    class="icon-button topbar__menu"
+    type="button"
+    aria-label="Contraer o expandir menú"
+    (click)="menuClicked.emit()"
+  >
+    ☰
+  </button>
+  <div class="topbar__search">
+    <span aria-hidden="true">⌕</span>
+    <input aria-label="Buscar" placeholder="Buscar clientes, productos, facturas..." />
+    <kbd>Ctrl + K</kbd>
+  </div>
+  <button class="topbar__filter" type="button"><span>▤</span> Todas las empresas <span>⌄</span></button>
+  <button class="topbar__filter topbar__date" type="button"><span>▣</span> Este mes <span>⌄</span></button>
+  <button class="icon-button topbar__notification" type="button" aria-label="Notificaciones">
+    ♧<span class="notification-dot">3</span>
+  </button>
+  <button class="icon-button topbar__help" type="button" aria-label="Ayuda">?</button>
+  <div class="topbar__profile">
+    <span class="profile-avatar">KB</span>
+    <span><strong>Khaled Benavides</strong><small>Administrador</small></span>
+    <span aria-hidden="true">⌄</span>
+  </div>
+</header>
