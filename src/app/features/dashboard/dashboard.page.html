@@ -1,0 +1,29 @@
+<section class="dashboard" aria-labelledby="dashboard-title">
+  <div class="dashboard__intro">
+    <div>
+      <p class="eyebrow">LUNES, 16 DE MAYO DE 2025</p>
+      <h1 id="dashboard-title">¡Buenos días, Khaled! <span aria-hidden="true">☀</span></h1>
+      <p class="dashboard__subtitle">Este es el estado actual de tu empresa.</p>
+    </div>
+    <button class="dashboard__date" type="button"><span aria-hidden="true">▣</span> 01 May — 16 May 2025 <span aria-hidden="true">⌄</span></button>
+  </div>
+
+  <section class="metrics-grid" aria-label="Indicadores del negocio">
+    <app-metric-card *ngFor="let metric of metrics" [metric]="metric" />
+  </section>
+
+  <section class="overview-grid" aria-label="Resumen del negocio">
+    <app-performance-chart />
+    <app-activity-feed [activities]="activities" />
+    <app-attention-panel [items]="attentionItems" />
+  </section>
+
+  <section class="lower-grid" aria-label="Trabajo y accesos rápidos">
+    <app-task-flow
+      [tasks]="taskStore.tasks()"
+      (taskCreated)="taskStore.addTask($event)"
+      (taskToggled)="taskStore.toggleTask($event)"
+    />
+    <app-quick-actions />
+  </section>
+</section>

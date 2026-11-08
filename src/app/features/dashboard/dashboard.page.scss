@@ -1,0 +1,137 @@
+.dashboard {
+  display: grid;
+  gap: 18px;
+}
+
+.dashboard__intro {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.eyebrow {
+  margin: 0 0 7px;
+  color: #77788d;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.075em;
+}
+
+.dashboard__intro h1 {
+  margin: 0;
+  color: #17182f;
+  font-size: clamp(22px, 2.2vw, 29px);
+  font-weight: 700;
+  letter-spacing: -0.045em;
+}
+
+.dashboard__intro h1 span {
+  color: #e6a845;
+  font-size: 21px;
+}
+
+.dashboard__subtitle {
+  margin: 6px 0 0;
+  color: #7e7f91;
+  font-size: 12px;
+}
+
+.dashboard__date {
+  display: flex;
+  min-height: 36px;
+  align-items: center;
+  gap: 10px;
+  padding: 0 11px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: #4a4b61;
+  background: #fff;
+  cursor: pointer;
+  font: inherit;
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 13px;
+}
+
+.overview-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.24fr) minmax(250px, 0.9fr) minmax(230px, 0.78fr);
+  gap: 13px;
+}
+
+.overview-grid > * {
+  min-width: 0;
+  padding: 17px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 2px 8px #23204405;
+}
+
+.lower-grid {
+  display: grid;
+  grid-template-columns: minmax(300px, 0.85fr) minmax(0, 1.35fr);
+  gap: 13px;
+}
+
+.lower-grid > * {
+  min-width: 0;
+  padding: 17px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 2px 8px #23204405;
+}
+
+@media (max-width: 1220px) {
+  .overview-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .overview-grid app-performance-chart {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 850px) {
+  .metrics-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .overview-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .overview-grid app-performance-chart {
+    grid-column: auto;
+  }
+
+  .lower-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 520px) {
+  .dashboard__intro {
+    align-items: flex-start;
+  }
+
+  .dashboard__date {
+    width: 36px;
+    min-width: 36px;
+    justify-content: center;
+    overflow: hidden;
+    padding: 0;
+    font-size: 0;
+  }
+
+  .dashboard__date span:first-child {
+    font-size: 14px;
+  }
+}

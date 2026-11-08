@@ -1,0 +1,18 @@
+<section class="panel attention" aria-labelledby="attention-title">
+  <div class="panel-heading">
+    <h2 id="attention-title">Requiere tu atención</h2>
+    <a class="text-link" routerLink="/reportes">Ver todo</a>
+  </div>
+  <a
+    class="attention__item"
+    *ngFor="let item of items()"
+    [routerLink]="item.tone === 'amber' ? '/inventario' : '/finanzas'"
+  >
+    <span class="attention__icon" [attr.data-tone]="item.tone" aria-hidden="true">{{ item.icon }}</span>
+    <span class="attention__copy">
+      <strong>{{ item.title }}</strong>
+      <small>{{ item.detail }}</small>
+    </span>
+    <span class="attention__arrow" aria-hidden="true">›</span>
+  </a>
+</section>
