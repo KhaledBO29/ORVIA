@@ -1,0 +1,46 @@
+<div class="metrics-grid" aria-label="Indicadores del módulo">
+  <article
+    class="metric-card"
+    *ngFor="let metric of metrics()"
+    [ngClass]="'metric-card--' + metric.tone"
+  >
+    <div class="metric-card__top">
+      <span class="metric-card__icon" aria-hidden="true">{{ metric.icon }}</span>
+      <span class="metric-card__label">{{ metric.label }}</span>
+    </div>
+    <strong class="metric-card__value">{{ metric.value }}</strong>
+    <span class="metric-card__caption">Actualizado con los registros de este navegador</span>
+  </article>
+</div>
+
+@if (financialSummary(); as summary) {
+  <section class="balance-panel panel" aria-label="Resumen del balance">
+    <div class="balance-panel__intro">
+      <div>
+        <span class="eyebrow">RESUMEN FINANCIERO</span>
+        <h2>Flujo de operaciones</h2>
+      </div>
+      <a routerLink="/registro-principal">Abrir registro principal <span aria-hidden="true">→</span></a>
+    </div>
+    <div class="balance-panel__totals">
+      <div>
+        <span>Ingresos y ventas</span>
+        <strong class="value-green">{{ summary.income }}</strong>
+      </div>
+      <div>
+        <span>Gastos y compras</span>
+        <strong class="value-rose">{{ summary.expenses }}</strong>
+      </div>
+      <div>
+        <span>Balance del periodo</span>
+        <strong [ngClass]="summary.isPositive ? 'value-green' : 'value-rose'">
+          {{ summary.balance }}
+        </strong>
+      </div>
+    </div>
+    <div class="balance-panel__bar" role="img" aria-label="Proporción entre ingresos y gastos">
+      <span class="balance-panel__bar-income" [style.width.%]="summary.incomePercent"></span>
+      <span class="balance-panel__bar-expense" [style.width.%]="summary.expensePercent"></span>
+    </div>
+  </section>
+}

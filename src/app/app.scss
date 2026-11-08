@@ -1,0 +1,35 @@
+:host {
+  display: block;
+  min-height: 100vh;
+}
+
+.app-layout {
+  min-height: 100vh;
+}
+
+.app-content {
+  min-width: 0;
+  margin-left: var(--sidebar-width);
+  transition: margin-left 180ms ease;
+}
+
+.app-layout--collapsed .app-content {
+  margin-left: var(--sidebar-collapsed-width);
+}
+
+.main-content {
+  width: min(100%, 1680px);
+  margin: 0 auto;
+  padding: 28px 30px 36px;
+}
+
+@media (max-width: 760px) {
+  .app-content,
+  .app-layout--collapsed .app-content {
+    margin-left: var(--sidebar-collapsed-width);
+  }
+
+  .main-content {
+    padding: 22px 16px 30px;
+  }
+}

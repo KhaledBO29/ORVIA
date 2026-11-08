@@ -1,0 +1,17 @@
+<article class="metric-card" [attr.data-tone]="metric().tone">
+  <div class="metric-card__top">
+    <span class="metric-card__icon" aria-hidden="true">{{ metric().icon }}</span>
+    <span class="metric-card__label">{{ metric().label }}</span>
+    <button class="metric-card__more" type="button" [attr.aria-label]="'Más opciones: ' + metric().label">⋮</button>
+  </div>
+  <div class="metric-card__value">{{ metric().value }} <span>{{ metric().suffix }}</span></div>
+  <div class="metric-card__bottom">
+    <span class="metric-card__change" [class.metric-card__change--down]="metric().direction === 'down'">
+      {{ metric().direction === 'up' ? '↑' : '↓' }} {{ metric().change }}
+    </span>
+    <span class="metric-card__period">vs. mes anterior</span>
+    <svg class="metric-card__sparkline" viewBox="0 0 90 24" role="img" [attr.aria-label]="'Tendencia: ' + metric().label">
+      <polyline points="0,18 10,14 19,17 29,10 38,15 48,8 58,12 69,4 79,9 90,2" />
+    </svg>
+  </div>
+</article>

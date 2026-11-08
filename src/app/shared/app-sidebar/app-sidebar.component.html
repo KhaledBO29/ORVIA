@@ -1,0 +1,45 @@
+<aside class="sidebar" [ngClass]="{ 'sidebar--collapsed': collapsed() }">
+  <a class="brand" routerLink="/inicio" aria-label="ORVIA, ir al inicio">
+    <span class="brand__mark">O</span>
+    <span class="brand__text">
+      <strong>ORVIA</strong>
+      <small>Sistema Operativo Empresarial</small>
+    </span>
+  </a>
+
+  <nav class="navigation" aria-label="Navegación principal">
+    <a
+      *ngFor="let item of navigationItems"
+      class="navigation__item"
+      [routerLink]="item.route"
+      routerLinkActive="navigation__item--active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      [attr.aria-label]="item.label"
+      [title]="collapsed() ? item.label : null"
+    >
+      <span class="navigation__icon" aria-hidden="true">{{ item.icon }}</span>
+      <span class="navigation__label">{{ item.label }}</span>
+    </a>
+  </nav>
+
+  <div class="sidebar__context">
+    <label for="company">Empresa actual</label>
+    <select id="company" aria-label="Empresa actual">
+      <option>Mi empresa</option>
+      <option>Todas las empresas</option>
+    </select>
+    <label for="branch">Sucursal actual</label>
+    <select id="branch" aria-label="Sucursal actual">
+      <option>Sucursal principal</option>
+      <option>Todas las sucursales</option>
+    </select>
+  </div>
+
+  <div class="sidebar__footer">
+    <span class="sidebar__avatar">KB</span>
+    <span class="sidebar__user">
+      <strong>Khaled Benavides</strong>
+      <small>Administrador</small>
+    </span>
+  </div>
+</aside>
