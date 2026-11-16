@@ -1,3 +1,4 @@
+
 export type ModuleSlug =
   | 'registro-principal'
   | 'finanzas'
@@ -57,6 +58,7 @@ const COMMON_COLUMNS: readonly RecordColumn[] = [
   { key: 'status', label: 'Estado' },
 ];
 
+// Crea definiciones con columnas y registros iniciales reutilizables para cada módulo.
 function createDefinition(
   slug: ModuleSlug,
   title: string,
@@ -95,6 +97,7 @@ function createDefinition(
 }
 
 export const BUSINESS_MODULES: Readonly<Record<ModuleSlug, ModuleDefinition>> = {
+  // Estos registros son datos de demostración; los cambios del usuario se guardan aparte.
   'registro-principal': createDefinition(
     'registro-principal',
     'Registro principal',

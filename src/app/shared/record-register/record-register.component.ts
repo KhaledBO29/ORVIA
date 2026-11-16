@@ -27,6 +27,7 @@ export class RecordRegisterComponent {
   protected readonly query = signal('');
   protected readonly statusFilter = signal<StatusFilter>('Todas');
   protected readonly filters: readonly StatusFilter[] = ['Todas', 'Pendientes', 'Completadas'];
+  // Combina la búsqueda por texto con el filtro; se actualiza al cambiar entradas o controles.
   protected readonly filteredRecords = computed(() => {
     const normalizedQuery = this.query().trim().toLocaleLowerCase('es');
     return this.records().filter((record) => {
