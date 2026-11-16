@@ -70,7 +70,7 @@ La pestaña **Finanzas** y todas las opciones del menú incluyen datos de ejempl
 
 ## 6. Ramas, commits y PR
 
-Se trabaja **un componente por rama**. El historial inicial está dividido por contenido y se publica en ramas `feature/...`:
+Para el trabajo nuevo, usa **una rama temporal por componente** con el prefijo `feature/` y crea un commit `Feat: ...` por componente. La tabla resume cómo se organizaron los commits históricos, que ya están integrados:
 
 | Componente | Rama | Commit |
 |---|---|---|
@@ -79,22 +79,24 @@ Se trabaja **un componente por rama**. El historial inicial está dividido por c
 | Finanzas y CRUD de módulos empresariales | `feature/gestion-modulos` | `Feat: Habilitar registros CRUD para módulos empresariales` |
 | Documentación de componentes y plantilla PR | `feature/documentacion-angular` | `Feat: Documentar arquitectura y flujo de aprendizaje` |
 
-Cada rama feature posterior parte de la anterior, por lo que las solicitudes de cambios se deben revisar y fusionar en ese orden:
+Las ramas históricas de esta entrega quedaron apiladas una sobre otra. Para el trabajo nuevo, no apiles una feature sobre otra: crea cada rama desde `develop`. Así `develop` no recibe cambios directos y solo avanza cuando se aprueba y fusiona un PR.
 
 ```powershell
 git switch develop
-git pull origin develop
-git switch -c feature/nuevo-componente
+git pull --ff-only origin develop
+git switch -c feature/nombre-del-componente
 # Implementa y comprueba el componente.
 git add ruta/al/componente
 git commit -m "Feat: Agregar el nuevo componente"
-git push -u origin feature/nuevo-componente
+git push -u origin feature/nombre-del-componente
 ```
 
-En GitHub, crea un PR de cada rama de la tabla hacia `develop` y completa `.github/PULL_REQUEST_TEMPLATE.md`. Fusiona los PR en el mismo orden para que los cambios apilados queden integrados correctamente.
+En GitHub, crea un PR de `feature/nombre-del-componente` hacia `develop` y completa `.github/PULL_REQUEST_TEMPLATE.md`. Pide al colaborador revisor una aprobación y fusiona el PR solo después de recibirla. No hagas commits directamente en `develop` ni fusiones una rama feature dentro de otra. Cuando `develop` esté listo para publicarse, crea un PR separado de `develop` hacia `main`.
 
 ### Estado de esta entrega
 
-El repositorio remoto tiene `main` y `develop`; ya se publicaron `feature/dashboard`, `feature/registro-principal` y `feature/gestion-modulos`. **No se han creado PR**. Al completar la guía, publica la rama `feature/documentacion-angular` y crea los PR en el orden de la tabla.
+Los commits de las ramas feature históricas quedaron apilados en este orden: `feature/dashboard` → `feature/registro-principal` → `feature/gestion-modulos` → `feature/documentacion-angular`. `develop` contiene esa cadena y se integró en `main` mediante el [PR #1](https://github.com/KhaledBO29/ORVIA/pull/1), ya fusionado. Los cuatro commits feature siguen en `develop` y `main`; después de integrarlos, se eliminaron las referencias remotas de esas ramas para limpiar el repositorio. Para trabajo nuevo, crea ramas feature desde `develop` según el flujo anterior.
+
+`develop` queda sin cambios directos mientras se trabaja; solo se actualiza al aprobar y fusionar un PR de feature. Usa un PR de `develop` hacia `main` cuando quieras publicar una versión.
 
 Los commits se atribuyen al usuario Git configurado en el equipo. No se añadió ningún `Co-authored-by` ni colaborador adicional.

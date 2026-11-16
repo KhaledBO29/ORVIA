@@ -29,6 +29,6 @@ Las pestañas incluyen formularios de demostración, búsqueda, filtros y accion
 
 ## Ramas y pull requests
 
-Cada componente se trabaja en su rama `feat/...` desde `develop`, con un commit `Feat: ...`. La plantilla esta en `.github/PULL_REQUEST_TEMPLATE.md`.
+Cada componente se trabaja en una rama temporal `feature/<componente>` creada desde `develop`, con un commit `Feat: ...`. Abre un pull request de la rama hacia `develop` usando `.github/PULL_REQUEST_TEMPLATE.md`; integra solo después de la aprobación de otro colaborador. No hagas commits directos en `develop`. Cuando `develop` esté listo para publicarse, abre un pull request separado hacia `main`.
 
 El proyecto está conectado a `https://github.com/KhaledBO29/ORVIA`. La guía documenta las ramas, commits y PR sugeridos.
