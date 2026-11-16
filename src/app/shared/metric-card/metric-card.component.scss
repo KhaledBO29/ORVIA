@@ -1,0 +1,114 @@
+.metric-card {
+  min-width: 0;
+  padding: 16px 17px 13px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 2px 8px #23204405;
+}
+
+.metric-card__top {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.metric-card__icon {
+  display: grid;
+  width: 32px;
+  height: 32px;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 9px;
+  color: #6543dc;
+  background: #f0ebff;
+  font-size: 15px;
+}
+
+.metric-card[data-tone='green'] .metric-card__icon { color: #138963; background: #e8f7f0; }
+.metric-card[data-tone='rose'] .metric-card__icon { color: #d54d69; background: #fff0f3; }
+.metric-card[data-tone='amber'] .metric-card__icon { color: #bd831e; background: #fff5e3; }
+
+.metric-card__label {
+  overflow: hidden;
+  color: var(--muted);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.035em;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.metric-card__more {
+  margin-left: auto;
+  border: 0;
+  color: #9293a6;
+  background: transparent;
+  font-size: 17px;
+}
+
+.metric-card__value {
+  margin: 14px 0 9px;
+  color: var(--text);
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.045em;
+}
+
+.metric-card__value span {
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+.metric-card__bottom {
+  display: flex;
+  min-height: 23px;
+  align-items: center;
+  gap: 6px;
+}
+
+.metric-card__change {
+  color: #15976b;
+  font-size: 10px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.metric-card__change--down {
+  color: #d85269;
+}
+
+.metric-card__period {
+  color: #9697a9;
+  font-size: 9px;
+  white-space: nowrap;
+}
+
+.metric-card__sparkline {
+  width: 62px;
+  height: 23px;
+  margin-left: auto;
+  overflow: visible;
+}
+
+.metric-card__sparkline polyline {
+  fill: none;
+  stroke: #7658e9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+}
+
+.metric-card[data-tone='rose'] .metric-card__sparkline polyline { stroke: #e47d98; }
+.metric-card[data-tone='amber'] .metric-card__sparkline polyline { stroke: #e8ac48; }
+.metric-card[data-tone='green'] .metric-card__sparkline polyline { stroke: #39ae85; }
+
+@media (max-width: 500px) {
+  .metric-card { padding: 13px 12px; }
+  .metric-card__value { font-size: 18px; }
+  .metric-card__period,
+  .metric-card__sparkline { display: none; }
+}

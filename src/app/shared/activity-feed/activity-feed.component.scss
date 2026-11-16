@@ -1,0 +1,103 @@
+.activity {
+  min-width: 0;
+}
+
+.panel-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 9px;
+}
+
+.panel-heading h2 {
+  margin: 0;
+  font-size: 13px;
+}
+
+.text-link {
+  color: #6444df;
+  font-size: 10px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.text-link:hover { text-decoration: underline; }
+
+.activity__item {
+  display: flex;
+  min-height: 63px;
+  align-items: center;
+  gap: 9px;
+  border-bottom: 1px solid #f1f0f5;
+}
+
+.activity__item:last-child { border-bottom: 0; }
+
+.activity__icon {
+  display: grid;
+  width: 29px;
+  height: 29px;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 9px;
+  color: #5e40d5;
+  background: #f0ecff;
+  font-size: 13px;
+}
+
+.activity__icon[data-tone='green'] { color: #14936a; background: #e8f7f0; }
+.activity__icon[data-tone='rose'] { color: #d54d69; background: #fff0f3; }
+.activity__icon[data-tone='amber'] { color: #b9821e; background: #fff5e3; }
+
+.activity__avatar {
+  display: grid;
+  width: 28px;
+  height: 28px;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 50%;
+  color: #44346f;
+  background: #e8e4f4;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.activity__description {
+  display: grid;
+  min-width: 0;
+  gap: 3px;
+}
+
+.activity__description strong {
+  overflow: hidden;
+  font-size: 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.activity__description span,
+.activity__description small {
+  overflow: hidden;
+  color: #77788d;
+  font-size: 9px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.activity__description small { color: #9a9bab; }
+
+.activity__amount {
+  margin-left: auto;
+  font-size: 9px;
+  white-space: nowrap;
+}
+
+.activity__amount[data-tone='green'] { color: #12885f; }
+.activity__amount[data-tone='rose'] { color: #d34c64; }
+.activity__amount[data-tone='amber'] { color: #ac761a; }
+
+@media (max-width: 520px) {
+  .activity__amount { font-size: 8px; }
+}

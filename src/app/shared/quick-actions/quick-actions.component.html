@@ -1,0 +1,19 @@
+<section class="panel quick-actions" aria-labelledby="quick-actions-title">
+  <div class="panel-heading">
+    <div>
+      <h2 id="quick-actions-title">Acciones rápidas</h2>
+      <p class="panel-subtitle">Atajos para continuar tu trabajo</p>
+    </div>
+  </div>
+  <div class="quick-actions__list">
+    <a
+      class="quick-action"
+      *ngFor="let action of actions"
+      [routerLink]="action.route"
+    >
+      <span class="quick-action__icon" aria-hidden="true">{{ action.icon }}</span>
+      <span>{{ action.label }}</span>
+      <span class="quick-action__arrow" aria-hidden="true">→</span>
+    </a>
+  </div>
+</section>

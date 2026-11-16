@@ -1,0 +1,16 @@
+<section class="panel activity" aria-labelledby="activity-title">
+  <div class="panel-heading">
+    <h2 id="activity-title">Actividad reciente</h2>
+    <a class="text-link" routerLink="/reportes">Ver todo <span aria-hidden="true">→</span></a>
+  </div>
+  <article class="activity__item" *ngFor="let item of activities()">
+    <span class="activity__icon" [attr.data-tone]="item.tone" aria-hidden="true">{{ item.icon }}</span>
+    <span class="activity__avatar">{{ item.person.slice(0, 1) }}</span>
+    <span class="activity__description">
+      <strong>{{ item.person }}</strong>
+      <span>{{ item.action }}</span>
+      <small>{{ item.detail }}</small>
+    </span>
+    <strong class="activity__amount" [attr.data-tone]="item.tone">{{ item.amount }}</strong>
+  </article>
+</section>

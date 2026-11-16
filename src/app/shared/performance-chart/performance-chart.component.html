@@ -1,0 +1,50 @@
+<section class="panel performance" aria-labelledby="performance-title">
+  <div class="panel-heading">
+    <div>
+      <h2 id="performance-title">Rendimiento empresarial</h2>
+      <p class="panel-subtitle">Ventas durante los últimos {{ activePeriod() }}</p>
+    </div>
+    <div class="period-selector" aria-label="Periodo del gráfico">
+      @for (period of periods; track period) {
+        <button
+          type="button"
+          [class.period-selector__button--active]="activePeriod() === period"
+          [attr.aria-pressed]="activePeriod() === period"
+          (click)="selectPeriod(period)"
+        >
+          {{ period }}
+        </button>
+      }
+    </div>
+  </div>
+
+  <div class="chart-legend">
+    <span><i class="chart-legend__dot chart-legend__dot--violet"></i>Ventas</span>
+    <span><i class="chart-legend__dot chart-legend__dot--rose"></i>Gastos</span>
+  </div>
+
+  <div class="chart">
+    <div class="chart__axis" aria-hidden="true">
+      <span>$40M</span><span>$30M</span><span>$20M</span><span>$10M</span><span>$0</span>
+    </div>
+    <svg class="chart__plot" viewBox="0 0 560 190" preserveAspectRatio="none" role="img" aria-label="Gráfico de ventas y gastos en ascenso">
+      <defs>
+        <linearGradient id="sales-fill" x1="0" x2="0" y1="0" y2="1">
+          <stop offset="0%" stop-color="#7656e8" stop-opacity=".16" />
+          <stop offset="100%" stop-color="#7656e8" stop-opacity="0" />
+        </linearGradient>
+        <linearGradient id="expenses-fill" x1="0" x2="0" y1="0" y2="1">
+          <stop offset="0%" stop-color="#ed7c9c" stop-opacity=".12" />
+          <stop offset="100%" stop-color="#ed7c9c" stop-opacity="0" />
+        </linearGradient>
+      </defs>
+      <path d="M0 148 L40 123 L80 135 L120 91 L160 109 L200 76 L240 85 L280 44 L320 69 L360 87 L400 67 L440 80 L480 56 L520 72 L560 46 L560 190 L0 190 Z" fill="url(#sales-fill)" />
+      <path d="M0 148 L40 123 L80 135 L120 91 L160 109 L200 76 L240 85 L280 44 L320 69 L360 87 L400 67 L440 80 L480 56 L520 72 L560 46" class="chart__line chart__line--sales" />
+      <path d="M0 171 L40 158 L80 163 L120 143 L160 151 L200 126 L240 138 L280 112 L320 128 L360 139 L400 122 L440 136 L480 115 L520 132 L560 116 L560 190 L0 190 Z" fill="url(#expenses-fill)" />
+      <path d="M0 171 L40 158 L80 163 L120 143 L160 151 L200 126 L240 138 L280 112 L320 128 L360 139 L400 122 L440 136 L480 115 L520 132 L560 116" class="chart__line chart__line--expenses" />
+    </svg>
+  </div>
+  <div class="chart__dates" aria-hidden="true">
+    <span>16 Abr</span><span>21 Abr</span><span>26 Abr</span><span>1 May</span><span>6 May</span><span>11 May</span><span>16 May</span>
+  </div>
+</section>
