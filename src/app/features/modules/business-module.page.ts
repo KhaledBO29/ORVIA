@@ -58,6 +58,7 @@ export class BusinessModulePageComponent {
   private readonly routeData = toSignal(this.route.data, { initialValue: this.route.snapshot.data });
   private readonly recordsStore = inject(BusinessRecordsService);
 
+  // La ruta determina el módulo activo; Finanzas presenta los movimientos del registro principal.
   protected readonly activeSlug = computed<ModuleSlug>(() => {
     const slug = this.routeData()['module'];
     return isModuleSlug(slug) ? slug : 'registro-principal';
@@ -94,6 +95,7 @@ export class BusinessModulePageComponent {
       .reduce((total, record) => total + record.amount, 0),
   );
   protected readonly balance = computed(() => this.incomeTotal() - this.expenseTotal());
+  // Estos totales se recalculan automáticamente cuando cambia la señal de registros.
   protected readonly financialSummary = computed<FinancialSummary | null>(() => {
     if (this.activeSlug() !== 'finanzas' && this.activeSlug() !== 'registro-principal') {
       return null;
@@ -169,6 +171,7 @@ export class BusinessModulePageComponent {
       return;
     }
 
+    // El mismo formulario sirve para crear y editar, según exista un registro seleccionado.
     const value = this.form.getRawValue();
     const record = {
       name: value.name.trim(),

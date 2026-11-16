@@ -11,6 +11,7 @@ const DEFAULT_TASKS: readonly DashboardTask[] = [
 
 @Injectable({ providedIn: 'root' })
 export class TaskStoreService {
+  // `signal` mantiene las tareas reactivas y `computed` deriva el total completado.
   readonly tasks = signal<readonly DashboardTask[]>(this.loadTasks());
   readonly completedCount = computed(() => this.tasks().filter((task) => task.completed).length);
 
@@ -45,6 +46,7 @@ export class TaskStoreService {
   }
 
   private saveTasks(tasks: readonly DashboardTask[]): void {
+    // Persiste los cambios y notifica a los componentes que leen la señal.
     localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
     this.tasks.set(tasks);
   }

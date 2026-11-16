@@ -10,6 +10,7 @@ import { DashboardTask } from '../../features/dashboard/dashboard.models';
   templateUrl: './task-flow.component.html',
 })
 export class TaskFlowComponent {
+  // Recibe las tareas del padre y emite eventos para que el servicio cambie el estado.
   readonly tasks = input.required<readonly DashboardTask[]>();
   readonly taskCreated = output<string>();
   readonly taskToggled = output<string>();
@@ -29,6 +30,7 @@ export class TaskFlowComponent {
     const control = this.taskForm.controls.title;
     const title = control.value.trim();
 
+    // Evita aceptar tareas vacías o compuestas solo por espacios.
     if (!title) {
       control.markAsTouched();
       return;
