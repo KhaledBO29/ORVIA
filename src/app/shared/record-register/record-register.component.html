@@ -1,0 +1,109 @@
+<section class="register-panel panel" aria-labelledby="register-title">
+  <div class="register-panel__heading">
+    <div>
+      <p class="eyebrow">GESTIÓN Y SEGUIMIENTO</p>
+      <h2 id="register-title">Registro de {{ module().title.toLocaleLowerCase('es') }}</h2>
+      <p class="register-panel__count">{{ filteredRecords().length }} de {{ records().length }} registros</p>
+    </div>
+    <button class="primary-button primary-button--small" type="button" (click)="createRequested.emit()">
+      <span aria-hidden="true">＋</span> Nuevo registro
+    </button>
+  </div>
+
+  <div class="register-toolbar">
+    <label class="search-field">
+      <span aria-hidden="true">⌕</span>
+      <input
+        #searchInput
+        type="search"
+        aria-label="Buscar registros"
+        placeholder="Buscar por nombre, referencia..."
+        (input)="setQuery(searchInput.value)"
+      />
+    </label>
+    <div class="status-filters" aria-label="Filtrar por estado">
+      <button
+        *ngFor="let filter of filters"
+        type="button"
+        [class.status-filter--active]="statusFilter() === filter"
+        [attr.aria-pressed]="statusFilter() === filter"
+        (click)="setStatusFilter(filter)"
+      >
+        {{ filter }}
+      </button>
+    </div>
+  </div>
+
+  <div class="table-scroll">
+    <table class="records-table">
+      <thead>
+        <tr>
+          <th *ngFor="let column of module().columns">{{ column.label }}</th>
+          <th class="actions-heading">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let record of filteredRecords(); trackBy: trackById">
+          <td *ngFor="let column of module().columns">
+            @if (column.key === 'status') {
+              <span class="record-status" [ngClass]="statusClass(record.status)">
+                <i aria-hidden="true"></i>{{ record.status }}
+              </span>
+            } @else if (column.key === 'kind') {
+              <span class="record-kind">{{ record.kind }}</span>
+            } @else if (column.key === 'reference') {
+              <strong class="record-reference">{{ record.reference }}</strong>
+            } @else {
+              <span [class.record-description]="column.key === 'name'">
+                {{ formatValue(record, column.key) }}
+              </span>
+            }
+          </td>
+          <td class="record-actions">
+            <button
+              class="record-action"
+              type="button"
+              [attr.aria-label]="'Editar ' + record.reference"
+              title="Editar registro"
+              (click)="recordEditRequested.emit(record)"
+            >
+              ✎
+            </button>
+            <button
+              class="record-action record-action--complete"
+              type="button"
+              [attr.aria-label]="(isCompleted(record) ? 'Marcar como pendiente: ' : 'Completar: ') + record.reference"
+              [title]="isCompleted(record) ? 'Marcar como pendiente' : 'Completar'"
+              (click)="recordStatusChanged.emit(record)"
+            >
+              {{ isCompleted(record) ? '↶' : '✓' }}
+            </button>
+            <button
+              class="record-action record-action--delete"
+              type="button"
+              [attr.aria-label]="'Eliminar ' + record.reference"
+              title="Eliminar registro"
+              (click)="recordDeleted.emit(record)"
+            >
+              ×
+            </button>
+          </td>
+        </tr>
+        @if (filteredRecords().length === 0) {
+          <tr>
+            <td class="empty-state" [attr.colspan]="module().columns.length + 1">
+              <span class="empty-state__icon" aria-hidden="true">⌕</span>
+              <strong>No encontramos registros</strong>
+              <span>Prueba otra búsqueda o agrega un registro nuevo.</span>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <footer class="register-panel__footer">
+    <span>Datos de demostración · guardados localmente en este navegador</span>
+    <a routerLink="/inicio">Volver a inicio <span aria-hidden="true">→</span></a>
+  </footer>
+</section>

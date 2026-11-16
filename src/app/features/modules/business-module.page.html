@@ -1,0 +1,97 @@
+<section class="module-page" aria-labelledby="module-title">
+  <div class="module-page__heading">
+    <div>
+      <p class="eyebrow">ORVIA <span aria-hidden="true">/</span> {{ module().title }}</p>
+      <div class="module-page__title">
+        <span class="module-page__icon" aria-hidden="true">{{ module().icon }}</span>
+        <div>
+          <h1 id="module-title">{{ module().title }}</h1>
+          <p id="module-description">{{ module().description }}</p>
+        </div>
+      </div>
+    </div>
+    <button class="primary-button" type="button" (click)="openForm()">
+      <span aria-hidden="true">＋</span> Nuevo registro
+    </button>
+  </div>
+
+  <app-module-summary [metrics]="metrics()" [financialSummary]="financialSummary()" />
+
+  @if (formOpen()) {
+    <section class="form-panel panel" aria-labelledby="record-form-title">
+      <div class="form-panel__heading">
+        <div>
+          <p class="eyebrow">REGISTRO NUEVO</p>
+          <h2 id="record-form-title">{{ editingRecord() ? 'Editar' : 'Agregar' }} {{ module().entityLabel }}</h2>
+        </div>
+        <button class="icon-button" type="button" aria-label="Cerrar formulario" (click)="closeForm()">×</button>
+      </div>
+      <form class="record-form" [formGroup]="form" (ngSubmit)="saveRecord()">
+        <label>
+          {{ module().nameLabel }}
+          <input
+            type="text"
+            formControlName="name"
+            [placeholder]="'Escribe ' + module().nameLabel.toLocaleLowerCase('es')"
+          />
+          @if (form.controls.name.touched && form.controls.name.invalid) {
+            <small class="field-error">Este campo es obligatorio (máximo 100 caracteres).</small>
+          }
+        </label>
+        <label>
+          {{ module().partyLabel }}
+          <input
+            type="text"
+            formControlName="party"
+            [placeholder]="'Escribe ' + module().partyLabel.toLocaleLowerCase('es')"
+          />
+          @if (form.controls.party.touched && form.controls.party.invalid) {
+            <small class="field-error">Este campo es obligatorio (máximo 100 caracteres).</small>
+          }
+        </label>
+        <label>
+          {{ module().amountLabel }}
+          <input type="number" formControlName="amount" min="0.01" step="1" />
+          @if (form.controls.amount.touched && form.controls.amount.invalid) {
+            <small class="field-error">Ingresa un valor mayor que cero.</small>
+          }
+        </label>
+        @if (module().kinds.length > 0) {
+          <label>
+            Tipo
+            <select formControlName="kind">
+              <option *ngFor="let kind of module().kinds" [value]="kind">{{ kind }}</option>
+            </select>
+          </label>
+        }
+        <div class="record-form__actions">
+          <button class="secondary-button" type="button" (click)="closeForm()">Cancelar</button>
+          <button class="primary-button" type="submit">Guardar registro</button>
+        </div>
+      </form>
+      @if (activeSlug() === 'registro-principal') {
+        <p class="form-panel__hint">El registro se guarda en este navegador. Para guardarlo en un servidor se necesita conectar una API.</p>
+      }
+    </section>
+  }
+
+  @if (notice()) {
+    <p class="notice" role="status">{{ notice() }}</p>
+  }
+
+  <app-record-register
+    [module]="module()"
+    [records]="records()"
+    (createRequested)="openForm()"
+    (recordEditRequested)="editRecord($event)"
+    (recordStatusChanged)="toggleStatus($event)"
+    (recordDeleted)="deleteRecord($event)"
+  />
+
+  <section class="shortcuts" aria-label="Módulos relacionados">
+    <span>También puedes ir a</span>
+    <a *ngFor="let shortcut of shortcuts()" [routerLink]="shortcut.route">
+      {{ shortcut.label }} <span aria-hidden="true">↗</span>
+    </a>
+  </section>
+</section>

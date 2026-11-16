@@ -1,0 +1,218 @@
+.module-page {
+  display: grid;
+  min-width: 0;
+  gap: 18px;
+}
+
+.module-page__heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.eyebrow {
+  margin: 0 0 9px;
+  color: #85869a;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.075em;
+}
+
+.module-page__heading > div > .eyebrow span { padding-inline: 5px; color: #c4c2d0; }
+
+.module-page__title {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.module-page__icon {
+  display: grid;
+  width: 43px;
+  height: 43px;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid #e8e4f6;
+  border-radius: 12px;
+  color: #6343de;
+  background: #f2efff;
+  font-size: 19px;
+}
+
+.module-page__title h1 {
+  margin: 0;
+  color: #191a33;
+  font-size: clamp(22px, 2.2vw, 29px);
+  letter-spacing: -0.045em;
+}
+
+.module-page__title p {
+  margin: 5px 0 0;
+  color: #77788d;
+  font-size: 11px;
+}
+
+.primary-button,
+.secondary-button {
+  display: inline-flex;
+  min-height: 39px;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 0 14px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.primary-button {
+  color: #fff;
+  background: linear-gradient(110deg, #6747e6, #5232d3);
+  box-shadow: 0 3px 8px #6442dd23;
+}
+
+.primary-button:hover { background: #5030d1; }
+.primary-button--small { min-height: 35px; }
+
+.secondary-button {
+  border-color: var(--border);
+  color: #55566a;
+  background: #fff;
+}
+
+.panel {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 2px 8px #23204405;
+}
+
+.form-panel {
+  padding: 19px;
+  border-color: #ded8f7;
+  box-shadow: 0 5px 20px #49368d0d;
+}
+
+.form-panel__heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 17px;
+}
+
+.form-panel__heading .eyebrow { margin-bottom: 5px; }
+.form-panel__heading h2 { margin: 0; font-size: 15px; }
+
+.icon-button {
+  display: grid;
+  width: 32px;
+  height: 32px;
+  place-items: center;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: #77788d;
+  background: #fff;
+  cursor: pointer;
+  font: inherit;
+  font-size: 20px;
+}
+
+.record-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.record-form > label {
+  display: grid;
+  align-content: start;
+  gap: 7px;
+  color: #494a60;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.record-form input,
+.record-form select {
+  width: 100%;
+  min-height: 39px;
+  padding: 0 11px;
+  border: 1px solid #e8e7ee;
+  border-radius: 7px;
+  outline: 0;
+  color: #282940;
+  background: #fff;
+  font: inherit;
+  font-size: 11px;
+}
+
+.record-form input:focus,
+.record-form select:focus {
+  border-color: #8973e4;
+  box-shadow: 0 0 0 3px #7350e71a;
+}
+
+.field-error {
+  color: #c5445c;
+  font-size: 9px;
+  font-weight: 400;
+}
+
+.record-form__actions {
+  display: flex;
+  grid-column: 1 / -1;
+  justify-content: flex-end;
+  gap: 8px;
+  padding-top: 3px;
+}
+
+.form-panel__hint {
+  margin: 12px 0 0;
+  color: #89899b;
+  font-size: 10px;
+}
+
+.notice {
+  margin: 0;
+  padding: 11px 14px;
+  border: 1px solid #d5efdf;
+  border-radius: 8px;
+  color: #13734f;
+  background: #f0faf4;
+  font-size: 11px;
+}
+
+.shortcuts {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 9px;
+  color: #85869a;
+  font-size: 10px;
+}
+
+.shortcuts a {
+  padding: 7px 10px;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  color: #5a42bd;
+  background: #fff;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.shortcuts a:hover { border-color: #d7cefa; background: #faf9ff; }
+
+@media (max-width: 600px) {
+  .module-page__heading { align-items: flex-start; }
+  .module-page__heading > .primary-button { min-height: 36px; padding-inline: 9px; font-size: 9px; }
+  .module-page__title { align-items: flex-start; }
+  .module-page__title p { max-width: 290px; line-height: 1.45; }
+  .record-form { grid-template-columns: 1fr; }
+  .record-form__actions { grid-column: 1; }
+}
