@@ -23,6 +23,7 @@ const businessModules = [
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'inicio' },
   { path: 'inicio', component: DashboardPageComponent },
+  // Los módulos comparten una página; `data.module` le indica cuál debe mostrar.
   ...businessModules.map((module) => ({
     path: module,
     component: BusinessModulePageComponent,

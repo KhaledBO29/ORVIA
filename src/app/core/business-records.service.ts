@@ -13,6 +13,7 @@ export interface NewBusinessRecord {
 
 @Injectable({ providedIn: 'root' })
 export class BusinessRecordsService {
+  // Estado compartido de los módulos, inicializado desde localStorage o con datos de ejemplo.
   readonly records = signal<Readonly<Record<ModuleSlug, readonly BusinessRecord[]>>>(this.loadAllRecords());
 
   recordsFor(slug: ModuleSlug): readonly BusinessRecord[] {
@@ -30,6 +31,7 @@ export class BusinessRecordsService {
   addRecord(slug: ModuleSlug, entry: NewBusinessRecord): void {
     const records = this.recordsFor(slug);
     const prefix = BUSINESS_MODULES[slug].slug === 'registro-principal' ? 'OP' : slug.slice(0, 3).toUpperCase();
+    // Calcula la siguiente referencia numérica disponible para el módulo.
     const nextReference = records.reduce((next, record) => {
       const sequence = Number(record.reference.match(/(\d+)$/)?.[1] ?? 0);
       return sequence >= next ? sequence + 1 : next;
@@ -73,6 +75,7 @@ export class BusinessRecordsService {
   private loadAllRecords(): Readonly<Record<ModuleSlug, readonly BusinessRecord[]>> {
     const records = {} as Record<ModuleSlug, readonly BusinessRecord[]>;
 
+    // Cada módulo conserva sus propios registros bajo una clave diferente.
     for (const [slug, definition] of Object.entries(BUSINESS_MODULES) as [
       ModuleSlug,
       (typeof BUSINESS_MODULES)[ModuleSlug],
@@ -94,6 +97,7 @@ export class BusinessRecordsService {
   }
 
   private persist(slug: ModuleSlug, moduleRecords: readonly BusinessRecord[]): void {
+    // Guarda primero y luego actualiza la señal para refrescar las vistas suscritas.
     localStorage.setItem(`${STORAGE_PREFIX}${slug}`, JSON.stringify(moduleRecords));
     this.records.update((allRecords) => ({ ...allRecords, [slug]: moduleRecords }));
   }

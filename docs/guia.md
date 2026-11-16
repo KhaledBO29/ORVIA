@@ -70,16 +70,17 @@ La pestaña **Finanzas** y todas las opciones del menú incluyen datos de ejempl
 
 ## 6. Ramas, commits y PR
 
-Para el trabajo nuevo, usa **una rama temporal por componente** con el prefijo `feature/` y crea un commit `Feat: ...` por componente. La tabla resume cómo se organizaron los commits históricos, que ya están integrados:
+`develop` es la rama de integración: reúne las funcionalidades mediante commits de merge. Cada rama `feature/` conserva el estado de su trabajo; no necesita contener los cambios posteriores de las demás ramas.
 
-| Componente | Rama | Commit |
-|---|---|---|
-| Aplicación Angular, navegación, dashboard y tareas | `feature/dashboard` | `Feat: Crear dashboard empresarial y estructura Angular` |
-| Registro principal, datos y almacenamiento | `feature/registro-principal` | `Feat: Crear registro principal de operaciones` |
-| Finanzas y CRUD de módulos empresariales | `feature/gestion-modulos` | `Feat: Habilitar registros CRUD para módulos empresariales` |
-| Documentación de componentes y plantilla PR | `feature/documentacion-angular` | `Feat: Documentar arquitectura y flujo de aprendizaje` |
+| Trabajo | Rama |
+|---|---|
+| Aplicación Angular, navegación, dashboard y tareas | `feature/dashboard` |
+| Registro principal, datos y almacenamiento | `feature/registro-principal` |
+| Finanzas y CRUD de módulos empresariales | `feature/gestion-modulos` |
+| Guía, comentarios del código y flujo de ramas | `feature/documentacion-angular` |
+| Configuración de Angular CLI y extensiones de VS Code | `feature/configuracion-desarrollo` |
 
-Las ramas históricas de esta entrega quedaron apiladas una sobre otra. Para el trabajo nuevo, no apiles una feature sobre otra: crea cada rama desde `develop`. Así `develop` no recibe cambios directos y solo avanza cuando se aprueba y fusiona un PR.
+Los commits históricos se conservan con sus identificadores originales. Como las primeras funcionalidades se desarrollaron una sobre otra, sus ramas comparten los commits anteriores. Se registraron sus integraciones con merges explícitos para que el gráfico muestre cada funcionalidad y su unión. Las ramas nuevas parten de `develop`.
 
 ```powershell
 git switch develop
@@ -91,12 +92,14 @@ git commit -m "Feat: Agregar el nuevo componente"
 git push -u origin feature/nombre-del-componente
 ```
 
-En GitHub, crea un PR de `feature/nombre-del-componente` hacia `develop` y completa `.github/PULL_REQUEST_TEMPLATE.md`. Pide al colaborador revisor una aprobación y fusiona el PR solo después de recibirla. No hagas commits directamente en `develop` ni fusiones una rama feature dentro de otra. Cuando `develop` esté listo para publicarse, crea un PR separado de `develop` hacia `main`.
+En GitHub, crea un PR de la rama feature hacia `develop` con `.github/PULL_REQUEST_TEMPLATE.md` y pide la revisión de otro colaborador. Al fusionarlo, selecciona **Create a merge commit** para conservar las líneas de las ramas en el gráfico. Conserva las referencias de las ramas si quieres seguir viendo sus etiquetas.
 
-### Estado de esta entrega
+Cuando quieras publicar una versión, crea un PR separado de `develop` hacia `main`. La reorganización de ramas no modifica `main` ni reescribe los commits existentes. Los merges locales son integraciones de Git y no representan PR ni aprobaciones de GitHub.
 
-Los commits de las ramas feature históricas quedaron apilados en este orden: `feature/dashboard` → `feature/registro-principal` → `feature/gestion-modulos` → `feature/documentacion-angular`. `develop` contiene esa cadena y se integró en `main` mediante el [PR #1](https://github.com/KhaledBO29/ORVIA/pull/1), ya fusionado. Los cuatro commits feature siguen en `develop` y `main`; después de integrarlos, se eliminaron las referencias remotas de esas ramas para limpiar el repositorio. Para trabajo nuevo, crea ramas feature desde `develop` según el flujo anterior.
+Para consultar el gráfico de las ramas del proyecto:
 
-`develop` queda sin cambios directos mientras se trabaja; solo se actualiza al aprobar y fusionar un PR de feature. Usa un PR de `develop` hacia `main` cuando quieras publicar una versión.
+```powershell
+git log --graph --oneline --decorate --branches --remotes
+```
 
-Los commits se atribuyen al usuario Git configurado en el equipo. No se añadió ningún `Co-authored-by` ni colaborador adicional.
+El color de cada línea lo asigna el visor de Git y puede cambiar; la rama de integración se identifica por la etiqueta `develop`.
